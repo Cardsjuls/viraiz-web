@@ -1,0 +1,945 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIRAIZ | Remodelacion y Construccion</title>
+  <style>
+    :root {
+      --green: #087142;
+      --green-dark: #075833;
+      --orange: #f15a2f;
+      --yellow: #ffe866;
+      --ink: #1f2a24;
+      --muted: #66746b;
+      --soft: #f6f3ee;
+      --line: #e4ded4;
+      --white: #ffffff;
+      --shadow: 0 18px 45px rgba(20, 33, 25, 0.14);
+      --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --font-display: 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+      --font-logo: 'Arial Black', 'Trebuchet MS', Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid rgba(231, 223, 209, 0.95);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      width: min(1180px, calc(100% - 32px));
+      min-height: 78px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      min-width: 226px;
+    }
+
+    .logo-img {
+      width: auto;
+      height: 64px;
+      max-width: 230px;
+      display: block;
+      object-fit: contain;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+      font-weight: 700;
+      color: #344139;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 6px;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+      background: #eef6f1;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 6px;
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 800;
+      box-shadow: 0 10px 22px rgba(242, 99, 50, 0.22);
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--green);
+      color: var(--white);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      padding-top: 78px;
+      overflow: hidden;
+      background: var(--green-dark);
+    }
+
+    .slider {
+      position: absolute;
+      inset: 78px 0 0 0;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.75s ease;
+    }
+
+    .slide.is-active {
+      opacity: 1;
+    }
+
+    .slide img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(7, 88, 51, 0.86) 0%, rgba(7, 88, 51, 0.58) 42%, rgba(31, 42, 36, 0.2) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: min(1180px, calc(100% - 32px));
+      min-height: calc(100vh - 78px);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      padding: 72px 0 92px;
+      color: var(--white);
+    }
+
+    .hero-copy {
+      width: min(660px, 100%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff1bd;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 44px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--orange);
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 0.98;
+      letter-spacing: 0;
+      font-family: var(--font-display);
+      font-weight: 900;
+      margin-bottom: 20px;
+      max-width: 11ch;
+    }
+
+    .hero-copy p {
+      max-width: 620px;
+      font-size: clamp(18px, 2vw, 22px);
+      color: rgba(255, 255, 255, 0.88);
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 24px;
+      border-radius: 6px;
+      font-weight: 900;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: var(--orange);
+      box-shadow: 0 16px 34px rgba(242, 99, 50, 0.25);
+    }
+
+    .btn-secondary {
+      color: var(--white);
+      border: 2px solid rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .slider-controls {
+      position: absolute;
+      z-index: 3;
+      left: 50%;
+      bottom: 34px;
+      width: min(1180px, calc(100% - 32px));
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      color: var(--white);
+    }
+
+    .arrows {
+      display: flex;
+      gap: 10px;
+    }
+
+    .arrow {
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.52);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--white);
+      font-size: 26px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .arrow:hover {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .dots {
+      display: flex;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 34px;
+      height: 5px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.42);
+      cursor: pointer;
+    }
+
+    .dot.is-active {
+      background: var(--orange);
+    }
+
+    section {
+      scroll-margin-top: 92px;
+    }
+
+    .section {
+      padding: 96px 0;
+    }
+
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 40px;
+    }
+
+    .section-kicker {
+      color: var(--orange);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.08;
+      letter-spacing: 0;
+      font-family: var(--font-display);
+      font-weight: 900;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .section-head p,
+    .about-text p,
+    .contact-card p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .about {
+      background: linear-gradient(180deg, #fffaf0 0%, var(--soft) 100%);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+      gap: 54px;
+      align-items: center;
+    }
+
+    .owner-photo {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--white);
+    }
+
+    .owner-photo img {
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .about-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .mini-stat {
+      min-height: 116px;
+      padding: 18px;
+      border-radius: 8px;
+      background: var(--white);
+      border: 1px solid var(--line);
+    }
+
+    .mini-stat strong {
+      display: block;
+      color: var(--green);
+      font-size: 28px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 30px rgba(31, 42, 36, 0.08);
+      transition: 0.22s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .service-card img {
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .service-body {
+      padding: 22px;
+    }
+
+    .service-body h3 {
+      font-size: 21px;
+      line-height: 1.18;
+      font-family: var(--font-display);
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+
+    .service-body p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .contact {
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      color: var(--white);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+      gap: 36px;
+      align-items: stretch;
+    }
+
+    .contact h2,
+    .contact .section-kicker {
+      color: var(--white);
+    }
+
+    .contact .section-head {
+      margin-bottom: 0;
+    }
+
+    .contact .section-head p {
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .contact-card {
+      padding: 30px;
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-item {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .contact-item:last-child {
+      border-bottom: 0;
+    }
+
+    .contact-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #eef6f1;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .contact-item span {
+      color: var(--muted);
+    }
+
+    .footer {
+      background: #0d2118;
+      color: rgba(255, 255, 255, 0.78);
+      padding: 42px 0;
+    }
+
+    .footer-grid {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .footer .brand {
+      width: max-content;
+    }
+
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .socials a {
+      min-width: 42px;
+      height: 42px;
+      padding: 0 12px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: var(--white);
+      font-weight: 900;
+      transition: 0.2s ease;
+    }
+
+    .socials a:hover {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .copyright {
+      grid-column: 1 / -1;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 20px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 920px) {
+      .mobile-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 78px;
+        left: 16px;
+        right: 16px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px;
+        border-radius: 8px;
+        background: var(--white);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.is-open {
+        display: flex;
+      }
+
+      .nav-links a,
+      .nav-cta {
+        width: 100%;
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        min-height: 70px;
+      }
+
+      .brand {
+        min-width: 184px;
+      }
+
+      .logo-img {
+        width: auto;
+        height: 54px;
+        max-width: 190px;
+      }
+      .nav-links {
+        top: 70px;
+      }
+
+      .hero {
+        min-height: 94vh;
+        padding-top: 70px;
+      }
+
+      .slider {
+        inset: 70px 0 0 0;
+      }
+
+      .hero-content {
+        min-height: calc(94vh - 70px);
+        padding: 54px 0 86px;
+      }
+
+      h1 {
+        max-width: 9ch;
+      }
+
+      .hero-actions,
+      .slider-controls {
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .slider-controls {
+        bottom: 22px;
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .about-list,
+      .services-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .socials {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Navegacion principal">
+      <a class="brand" href="#inicio" aria-label="VIRAIZ inicio"><img class="logo-img" src="Logo.png?v=1" alt="VIRAIZ Inversiones Viraiz Company"></a>
+
+      <button class="mobile-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">=</button>
+
+      <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contactenos">Contactenos</a></li>
+        <li><a class="nav-cta" href="#contactenos">Cotizar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="slider" aria-label="Proyectos destacados">
+        <article class="slide is-active">
+          <img src="ba%C3%B1o%20reodelacion%20-%20copia.webp" alt="Antes y despues de remodelacion de bano">
+        </article>
+        <article class="slide">
+          <img src="comparison-of-a-room-in-an-apartment-before-and-af-2024-12-07-00-33-37-utc.webp" alt="Antes y despues de remodelacion de sala">
+        </article>
+        <article class="slide">
+          <img src="fachada.webp" alt="Antes y despues de remodelacion de fachada">
+        </article>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-copy">
+          <span class="eyebrow">Remodelacion integral</span>
+          <h1>Transformamos espacios</h1>
+          <p>Dise&ntilde;o, construccion, terminaciones y mantenimiento para hogares y negocios que necesitan verse mejor y funcionar mejor.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#servicios">Ver servicios</a>
+            <a class="btn btn-secondary" href="#contactenos">Hablar con nosotros</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-controls" aria-label="Controles del slider">
+        <div class="arrows">
+          <button class="arrow prev" type="button" aria-label="Slide anterior">&#8249;</button>
+          <button class="arrow next" type="button" aria-label="Slide siguiente">&#8250;</button>
+        </div>
+        <div class="dots">
+          <button class="dot is-active" type="button" aria-label="Ir al slide 1"></button>
+          <button class="dot" type="button" aria-label="Ir al slide 2"></button>
+          <button class="dot" type="button" aria-label="Ir al slide 3"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="nosotros">
+      <div class="wrap about-grid">
+        <div class="owner-photo">
+          <img src="Virginia.webp" alt="Virginia, duena de VIRAIZ">
+        </div>
+        <div class="about-text">
+          <p class="section-kicker">Quienes somos</p>
+          <h2>Virginia lidera cada proyecto con vision, orden y detalle.</h2>
+          <p>En VIRAIZ acompa&ntilde;amos remodelaciones residenciales y comerciales desde la idea inicial hasta la entrega final. Nuestro trabajo combina planificacion, seleccion de materiales, ejecucion tecnica y terminaciones limpias para lograr espacios modernos, funcionales y duraderos.</p>
+          <div class="about-list">
+            <div class="mini-stat">
+              <strong>01</strong>
+              <span>Evaluacion clara del espacio</span>
+            </div>
+            <div class="mini-stat">
+              <strong>02</strong>
+              <span>Proceso organizado por etapas</span>
+            </div>
+            <div class="mini-stat">
+              <strong>03</strong>
+              <span>Resultados listos para disfrutar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section services" id="servicios">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="section-kicker">Servicios</p>
+          <h2>Soluciones completas para renovar, reparar y construir.</h2>
+          <p>Trabajamos interiores, exteriores, cocinas, ba&ntilde;os, acabados y mantenimiento con imagen profesional y atencion al detalle.</p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <img src="Remodelacion%20General.webp" alt="Remodelacion general">
+            <div class="service-body">
+              <h3>Remodelacion general</h3>
+              <p>Renovacion de espacios completos, distribucion, reparaciones y mejoras esteticas.</p>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img src="cocina.webp" alt="Remodelacion de cocinas">
+            <div class="service-body">
+              <h3>Cocinas modernas</h3>
+              <p>Gabinetes, superficies, iluminacion y terminaciones para cocinas funcionales.</p>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img src="ba%C3%B1o%20reodelacion%20-%20copia.webp" alt="Remodelacion de banos">
+            <div class="service-body">
+              <h3>Ba&ntilde;os renovados</h3>
+              <p>Instalacion, revestimientos, muebles, griferia y detalles de acabado.</p>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img src="remodelacion1exteriores.webp" alt="Remodelacion de exteriores">
+            <div class="service-body">
+              <h3>Exteriores y fachadas</h3>
+              <p>Mejoras exteriores, pintura, revestimientos y renovacion de imagen.</p>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img src="Acabados%20y%20Decoraci%C3%B3n%20-%20copia.webp" alt="Acabados y decoracion">
+            <div class="service-body">
+              <h3>Acabados y decoracion</h3>
+              <p>Materiales, colores y detalles finales para elevar cada ambiente.</p>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img src="Mantenimiento%20y%20Reparaciones.webp" alt="Mantenimiento y reparaciones">
+            <div class="service-body">
+              <h3>Mantenimiento</h3>
+              <p>Reparaciones tecnicas, mantenimiento preventivo y soluciones puntuales.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contactenos">
+      <div class="wrap contact-grid">
+        <div class="section-head">
+          <p class="section-kicker">Contactenos</p>
+          <h2>Conversemos sobre la remodelacion que tienes en mente.</h2>
+          <p>Cu&eacute;ntanos que espacio quieres transformar y te ayudamos a definir el alcance, materiales y proximos pasos.</p>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-item">
+            <span class="contact-icon">T</span>
+            <div>
+              <strong>Telefono</strong>
+              <span>(000) 000-0000</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">W</span>
+            <div>
+              <strong>WhatsApp</strong>
+              <span>(000) 000-0000</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">@</span>
+            <div>
+              <strong>Email</strong>
+              <span>info@viraizcompany.com</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">P</span>
+            <div>
+              <strong>Ubicacion</strong>
+              <span>Servicio residencial y comercial</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#inicio" aria-label="VIRAIZ inicio"><img class="logo-img" src="Logo-footer.png?v=1" alt="VIRAIZ Inversiones Viraiz Company"></a>
+      </div>
+
+      <div class="socials" aria-label="Redes sociales">
+        <a href="#" aria-label="Facebook">F</a>
+        <a href="#" aria-label="Instagram">I</a>
+        <a href="#" aria-label="TikTok">T</a>
+        <a href="#" aria-label="WhatsApp">W</a>
+      </div>
+
+      <p class="copyright">&copy; 2026 VIRAIZ. Remodelacion, construccion, mantenimiento y acabados. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const dots = Array.from(document.querySelectorAll(".dot"));
+    const nextBtn = document.querySelector(".next");
+    const prevBtn = document.querySelector(".prev");
+    const menuBtn = document.querySelector(".mobile-toggle");
+    const menu = document.querySelector(".nav-links");
+    let currentSlide = 0;
+    let slideTimer;
+
+    function showSlide(index) {
+      currentSlide = (index + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle("is-active", slideIndex === currentSlide);
+      });
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("is-active", dotIndex === currentSlide);
+      });
+    }
+
+    function startSlider() {
+      clearInterval(slideTimer);
+      slideTimer = setInterval(() => showSlide(currentSlide + 1), 5200);
+    }
+
+    nextBtn.addEventListener("click", () => {
+      showSlide(currentSlide + 1);
+      startSlider();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      showSlide(currentSlide - 1);
+      startSlider();
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        showSlide(index);
+        startSlider();
+      });
+    });
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("is-open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("is-open");
+        menuBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    startSlider();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

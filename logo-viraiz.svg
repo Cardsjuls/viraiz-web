@@ -1,0 +1,30 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 304 168" role="img" aria-labelledby="title desc">
+  <title id="title">VIRAIZ Inversiones Viraiz Company</title>
+  <desc id="desc">Logo de VIRAIZ con techo verde, sol amarillo, balanza y letras naranja.</desc>
+  <rect width="304" height="168" fill="#ffffff"/>
+  <defs>
+    <radialGradient id="sun" cx="35%" cy="32%" r="67%">
+      <stop offset="0" stop-color="#fffcc7"/>
+      <stop offset="0.55" stop-color="#ffe866"/>
+      <stop offset="1" stop-color="#e5bd3e"/>
+    </radialGradient>
+  </defs>
+  <circle cx="116" cy="31" r="31" fill="url(#sun)"/>
+  <path d="M0 59H111L184 6L258 59H304" fill="none" stroke="#087142" stroke-width="18" stroke-linejoin="miter"/>
+  <path d="M256 28H276V59H256Z" fill="#087142"/>
+  <g fill="none" stroke="#222222" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M185 46V91"/>
+    <path d="M158 47H212"/>
+    <path d="M172 38L185 47L198 38"/>
+    <path d="M164 47L150 80H178L164 47Z"/>
+    <path d="M206 47L192 80H220L206 47Z"/>
+    <path d="M144 80H184"/>
+    <path d="M187 80H226"/>
+  </g>
+  <text x="7" y="139" fill="#f15a2f" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="66" font-weight="900" letter-spacing="0">V</text>
+  <text x="66" y="139" fill="#f15a2f" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="66" font-weight="900" letter-spacing="0">I</text>
+  <circle cx="76" cy="94" r="7.2" fill="#087142"/>
+  <text x="89" y="139" fill="#f15a2f" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="66" font-weight="900" letter-spacing="0">RAIZ</text>
+  <text x="2" y="162" fill="#087142" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">Inversiones Viraiz Company</text>
+</svg>
+
